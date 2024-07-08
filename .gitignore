@@ -1,6 +1,15 @@
+# Java compliation output
 server/target
+
+# DB data
 db/data
+
+# IDE
 .idea/
 
+# Secrets
+.env
+
+# Keep these files in the repo
 !.gitkeep
 !db/data/.gitkeep

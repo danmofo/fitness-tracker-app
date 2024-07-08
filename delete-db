@@ -1,0 +1,19 @@
+#/usr/bin/env bash
+
+# Deletes the 'db' service and recreates it
+
+# Stop the DB
+echo "Stopping db service."
+docker compose stop db
+
+# Remove the data directory
+echo "Removing data directory"
+sudo rm -rf ./db/data/
+mkdir ./db/data
+tree ./db
+
+# Reinitialise the DB
+docker compose up -d db
+
+# Follow the logs for debugging
+docker logs ft-mysql -f
