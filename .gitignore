@@ -2,4 +2,5 @@ server/target
 db/data
 .idea/
 
-!gitkeep
+!.gitkeep
+!db/data/.gitkeep
