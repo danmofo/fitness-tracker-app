@@ -29,6 +29,7 @@
 	<properties>
 		<java.version>22</java.version>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -62,6 +63,41 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.jooq</groupId>
+				<artifactId>jooq-codegen-maven</artifactId>
+				<version>3.19.10</version>
+				<configuration>
+					<jdbc>
+						<driver>com.mysql.cj.jdbc.Driver</driver>
+						<url>jdbc:mysql://${DB_HOST}/</url>
+						<user>${DB_USER}</user>
+						<password>${DB_PASSWORD}</password>
+					</jdbc>
+					<generator>
+						<database>
+							<name>org.jooq.meta.mysql.MySQLDatabase</name>
+							<includes>.*</includes>
+							<excludes>ft.flyway_schema_history</excludes>
+							<inputSchema>ft</inputSchema>
+						</database>
+						<target>
+							<packageName>com.dmoffat.fitnesstracker.db</packageName>
+							<directory>src/main/java</directory>
+						</target>
+					</generator>
+				</configuration>
+
+				<executions>
+					<execution>
+						<id>jooq-codegen</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

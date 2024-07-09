@@ -3,7 +3,7 @@ create table ft.body_weight (
     user_id int unsigned not null,
     logged_on date default (current_date),
     primary key(id),
-    foreign key(user_id) references ft.user(id)
+    constraint body_weight_user_id_fk foreign key (user_id) references ft.user(id)
 );
 
 create table ft.workout (
@@ -15,7 +15,7 @@ create table ft.workout (
     created_on timestamp default current_timestamp,
     updated_on timestamp default current_timestamp on update current_timestamp,
     primary key(id),
-    foreign key(user_id) references ft.user(id)
+    constraint workout_user_id_fk foreign key (user_id) references ft.user(id)
 );
 
 create table ft.exercise (
@@ -38,6 +38,6 @@ create table ft.workout_exercise (
     created_on timestamp default current_timestamp,
     updated_on timestamp default current_timestamp on update current_timestamp,
     primary key(id),
-    foreign key(workout_id) references ft.workout(id),
-    foreign key(exercise_id) references ft.exercise(id)
+    constraint workout_id_fk foreign key (workout_id) references ft.workout(id),
+    constraint exercise_id_fk foreign key (exercise_id) references ft.exercise(id)
 );
