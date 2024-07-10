@@ -6,11 +6,15 @@ package com.dmoffat.fitnesstracker.db;
 
 import com.dmoffat.fitnesstracker.db.tables.BodyWeight;
 import com.dmoffat.fitnesstracker.db.tables.Exercise;
+import com.dmoffat.fitnesstracker.db.tables.SpringSession;
+import com.dmoffat.fitnesstracker.db.tables.SpringSessionAttributes;
 import com.dmoffat.fitnesstracker.db.tables.User;
 import com.dmoffat.fitnesstracker.db.tables.Workout;
 import com.dmoffat.fitnesstracker.db.tables.WorkoutExercise;
 import com.dmoffat.fitnesstracker.db.tables.records.BodyWeightRecord;
 import com.dmoffat.fitnesstracker.db.tables.records.ExerciseRecord;
+import com.dmoffat.fitnesstracker.db.tables.records.SpringSessionAttributesRecord;
+import com.dmoffat.fitnesstracker.db.tables.records.SpringSessionRecord;
 import com.dmoffat.fitnesstracker.db.tables.records.UserRecord;
 import com.dmoffat.fitnesstracker.db.tables.records.WorkoutExerciseRecord;
 import com.dmoffat.fitnesstracker.db.tables.records.WorkoutRecord;
@@ -34,6 +38,9 @@ public class Keys {
 
     public static final UniqueKey<BodyWeightRecord> KEY_BODY_WEIGHT_PRIMARY = Internal.createUniqueKey(BodyWeight.BODY_WEIGHT, DSL.name("KEY_body_weight_PRIMARY"), new TableField[] { BodyWeight.BODY_WEIGHT.ID }, true);
     public static final UniqueKey<ExerciseRecord> KEY_EXERCISE_PRIMARY = Internal.createUniqueKey(Exercise.EXERCISE, DSL.name("KEY_exercise_PRIMARY"), new TableField[] { Exercise.EXERCISE.ID }, true);
+    public static final UniqueKey<SpringSessionRecord> KEY_SPRING_SESSION_PRIMARY = Internal.createUniqueKey(SpringSession.SPRING_SESSION, DSL.name("KEY_SPRING_SESSION_PRIMARY"), new TableField[] { SpringSession.SPRING_SESSION.PRIMARY_ID }, true);
+    public static final UniqueKey<SpringSessionRecord> KEY_SPRING_SESSION_SPRING_SESSION_IX1 = Internal.createUniqueKey(SpringSession.SPRING_SESSION, DSL.name("KEY_SPRING_SESSION_SPRING_SESSION_IX1"), new TableField[] { SpringSession.SPRING_SESSION.SESSION_ID }, true);
+    public static final UniqueKey<SpringSessionAttributesRecord> KEY_SPRING_SESSION_ATTRIBUTES_PRIMARY = Internal.createUniqueKey(SpringSessionAttributes.SPRING_SESSION_ATTRIBUTES, DSL.name("KEY_SPRING_SESSION_ATTRIBUTES_PRIMARY"), new TableField[] { SpringSessionAttributes.SPRING_SESSION_ATTRIBUTES.SESSION_PRIMARY_ID, SpringSessionAttributes.SPRING_SESSION_ATTRIBUTES.ATTRIBUTE_NAME }, true);
     public static final UniqueKey<UserRecord> KEY_USER_EMAIL = Internal.createUniqueKey(User.USER, DSL.name("KEY_user_email"), new TableField[] { User.USER.EMAIL }, true);
     public static final UniqueKey<UserRecord> KEY_USER_PRIMARY = Internal.createUniqueKey(User.USER, DSL.name("KEY_user_PRIMARY"), new TableField[] { User.USER.ID }, true);
     public static final UniqueKey<WorkoutRecord> KEY_WORKOUT_PRIMARY = Internal.createUniqueKey(Workout.WORKOUT, DSL.name("KEY_workout_PRIMARY"), new TableField[] { Workout.WORKOUT.ID }, true);
@@ -44,6 +51,7 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     public static final ForeignKey<BodyWeightRecord, UserRecord> BODY_WEIGHT_USER_ID_FK = Internal.createForeignKey(BodyWeight.BODY_WEIGHT, DSL.name("body_weight_user_id_fk"), new TableField[] { BodyWeight.BODY_WEIGHT.USER_ID }, Keys.KEY_USER_PRIMARY, new TableField[] { User.USER.ID }, true);
+    public static final ForeignKey<SpringSessionAttributesRecord, SpringSessionRecord> SPRING_SESSION_ATTRIBUTES_FK = Internal.createForeignKey(SpringSessionAttributes.SPRING_SESSION_ATTRIBUTES, DSL.name("SPRING_SESSION_ATTRIBUTES_FK"), new TableField[] { SpringSessionAttributes.SPRING_SESSION_ATTRIBUTES.SESSION_PRIMARY_ID }, Keys.KEY_SPRING_SESSION_PRIMARY, new TableField[] { SpringSession.SPRING_SESSION.PRIMARY_ID }, true);
     public static final ForeignKey<WorkoutRecord, UserRecord> WORKOUT_USER_ID_FK = Internal.createForeignKey(Workout.WORKOUT, DSL.name("workout_user_id_fk"), new TableField[] { Workout.WORKOUT.USER_ID }, Keys.KEY_USER_PRIMARY, new TableField[] { User.USER.ID }, true);
     public static final ForeignKey<WorkoutExerciseRecord, ExerciseRecord> EXERCISE_ID_FK = Internal.createForeignKey(WorkoutExercise.WORKOUT_EXERCISE, DSL.name("exercise_id_fk"), new TableField[] { WorkoutExercise.WORKOUT_EXERCISE.EXERCISE_ID }, Keys.KEY_EXERCISE_PRIMARY, new TableField[] { Exercise.EXERCISE.ID }, true);
     public static final ForeignKey<WorkoutExerciseRecord, WorkoutRecord> WORKOUT_ID_FK = Internal.createForeignKey(WorkoutExercise.WORKOUT_EXERCISE, DSL.name("workout_id_fk"), new TableField[] { WorkoutExercise.WORKOUT_EXERCISE.WORKOUT_ID }, Keys.KEY_WORKOUT_PRIMARY, new TableField[] { Workout.WORKOUT.ID }, true);

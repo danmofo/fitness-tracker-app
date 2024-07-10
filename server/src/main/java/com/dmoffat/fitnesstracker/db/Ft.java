@@ -6,6 +6,8 @@ package com.dmoffat.fitnesstracker.db;
 
 import com.dmoffat.fitnesstracker.db.tables.BodyWeight;
 import com.dmoffat.fitnesstracker.db.tables.Exercise;
+import com.dmoffat.fitnesstracker.db.tables.SpringSession;
+import com.dmoffat.fitnesstracker.db.tables.SpringSessionAttributes;
 import com.dmoffat.fitnesstracker.db.tables.User;
 import com.dmoffat.fitnesstracker.db.tables.Workout;
 import com.dmoffat.fitnesstracker.db.tables.WorkoutExercise;
@@ -42,6 +44,16 @@ public class Ft extends SchemaImpl {
     public final Exercise EXERCISE = Exercise.EXERCISE;
 
     /**
+     * The table <code>ft.SPRING_SESSION</code>.
+     */
+    public final SpringSession SPRING_SESSION = SpringSession.SPRING_SESSION;
+
+    /**
+     * The table <code>ft.SPRING_SESSION_ATTRIBUTES</code>.
+     */
+    public final SpringSessionAttributes SPRING_SESSION_ATTRIBUTES = SpringSessionAttributes.SPRING_SESSION_ATTRIBUTES;
+
+    /**
      * The table <code>ft.user</code>.
      */
     public final User USER = User.USER;
@@ -74,6 +86,8 @@ public class Ft extends SchemaImpl {
         return Arrays.asList(
             BodyWeight.BODY_WEIGHT,
             Exercise.EXERCISE,
+            SpringSession.SPRING_SESSION,
+            SpringSessionAttributes.SPRING_SESSION_ATTRIBUTES,
             User.USER,
             Workout.WORKOUT,
             WorkoutExercise.WORKOUT_EXERCISE
