@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+import org.springframework.transaction.annotation.Transactional;
 
 import static com.dmoffat.fitnesstracker.db.tables.SpringSession.SPRING_SESSION;
 import static org.hamcrest.Matchers.containsInAnyOrder;
@@ -62,6 +63,7 @@ class AuthControllerLoginIntegrationTest {
      * - Session in database contains the user that's authenticated
      */
     @Test
+    @Transactional
     void shouldReturnSessionTokenInHeaderAndCreateSessionAfterAuthentication() throws Exception {
         MvcResult result = this.mockMvc.perform(loginRequest("danmofo@gmail.com", "password"))
                 .andExpect(status().isOk())
@@ -78,17 +80,9 @@ class AuthControllerLoginIntegrationTest {
     }
 
     private String findPrincipalForSessionId(String sessionId) {
-        String emailSavedInSession = db.selectFrom(SPRING_SESSION)
+        return db.selectFrom(SPRING_SESSION)
             .where(SPRING_SESSION.SESSION_ID.eq(sessionId))
             .fetchOne(SPRING_SESSION.PRINCIPAL_NAME);
-
-        // Remove the record
-        // todo: Remove this when we've implemented the todo at the top of the class.
-        db.delete(SPRING_SESSION)
-            .where(SPRING_SESSION.SESSION_ID.eq(sessionId))
-            .execute();
-
-        return emailSavedInSession;
     }
 
     private MockHttpServletRequestBuilder loginRequest(String email, String password) throws JsonProcessingException {
