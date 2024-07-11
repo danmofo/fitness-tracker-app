@@ -1,6 +1,5 @@
 package com.dmoffat.fitnesstracker.dao;
 
-import com.dmoffat.fitnesstracker.db.tables.records.WorkoutRecord;
 import com.dmoffat.fitnesstracker.model.Workout;
 import org.jooq.DSLContext;
 import org.jooq.types.UInteger;
@@ -16,7 +15,7 @@ public class WorkoutDao {
     @Autowired private DSLContext db;
 
     public Workout create(Integer ownerUserId) {
-        WorkoutRecord workout = db.newRecord(WORKOUT);
+        var workout = db.newRecord(WORKOUT);
         workout.setUserId(UInteger.valueOf(ownerUserId));
         workout.setStartedOn(LocalDateTime.now());
         workout.setCreatedOn(LocalDateTime.now());

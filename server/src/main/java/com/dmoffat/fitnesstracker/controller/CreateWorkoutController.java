@@ -1,6 +1,5 @@
 package com.dmoffat.fitnesstracker.controller;
 
-import com.dmoffat.fitnesstracker.model.Workout;
 import com.dmoffat.fitnesstracker.model.response.ApiResponse;
 import com.dmoffat.fitnesstracker.model.response.workout.CreateWorkoutResponse;
 import com.dmoffat.fitnesstracker.service.WorkoutService;
@@ -22,7 +21,7 @@ public class CreateWorkoutController {
 
     @PostMapping("/api/v1/workout/")
     public ResponseEntity<ApiResponse> handleCreateWorkout(@AuthenticationPrincipal User user) {
-        Workout workout = workoutService.createWorkout(user);
+        var workout = workoutService.createWorkout(user);
         return ResponseEntity.ok(new CreateWorkoutResponse(workout.getId()));
     }
 }

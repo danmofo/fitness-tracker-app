@@ -36,10 +36,10 @@ class CreateWorkoutControllerIntegrationTest {
 
     private String createSessionId() throws Exception {
         logger.info("Creating session ID");
-        ObjectMapper mapper = new ObjectMapper();
+        var mapper = new ObjectMapper();
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
 
-        AuthController.LoginRequest loginRequest = new AuthController.LoginRequest("danmofo@gmail.com", "password");
+        var loginRequest = new AuthController.LoginRequest("danmofo@gmail.com", "password");
 
         MockHttpServletRequestBuilder request = post("/api/v1/auth/login")
             .contentType(MediaType.APPLICATION_JSON)
@@ -49,7 +49,7 @@ class CreateWorkoutControllerIntegrationTest {
     }
 
     private MockHttpServletRequestBuilder authenticatedRequest(String endpoint) throws Exception {
-        String sessionId = createSessionId();
+        var sessionId = createSessionId();
         logger.debug("Performing authenticated request to: " + endpoint + " with session ID: " + sessionId);
         return post(endpoint)
             .header("X-Auth-Token", sessionId);

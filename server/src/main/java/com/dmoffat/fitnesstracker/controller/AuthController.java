@@ -13,9 +13,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextHolderStrategy;
 import org.springframework.security.web.context.SecurityContextRepository;
@@ -43,19 +41,19 @@ public class AuthController {
             HttpServletRequest req,
             HttpServletResponse res) {
 
-        UsernamePasswordAuthenticationToken authentication =
+        var authentication =
             UsernamePasswordAuthenticationToken.unauthenticated(loginRequest.email(), loginRequest.password());
 
         try {
-            Authentication response = authenticationManager.authenticate(authentication);
-            SecurityContext context = securityContextHolderStrategy.createEmptyContext();
-            context.setAuthentication(response);
-            securityContextHolderStrategy.setContext(context);
-            securityContextRepository.saveContext(context, req, res);
+            var authResponse = authenticationManager.authenticate(authentication);
+            var securityContext = securityContextHolderStrategy.createEmptyContext();
+            securityContext.setAuthentication(authResponse);
+            securityContextHolderStrategy.setContext(securityContext);
+            securityContextRepository.saveContext(securityContext, req, res);
 
             return ResponseEntity.ok(new LoginSuccessResponse());
         } catch (AuthenticationException ex) {
-            ErrorResponse body = new ErrorResponse(ErrorCode.INVALID_CREDENTIALS);
+            var body = new ErrorResponse(ErrorCode.INVALID_CREDENTIALS);
             return new ResponseEntity<>(body, HttpStatusCode.valueOf(401));
         }
     }

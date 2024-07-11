@@ -13,7 +13,7 @@ public class WorkoutService {
     @Autowired private UserDao userDao;
 
     public Workout createWorkout(User user) {
-        com.dmoffat.fitnesstracker.model.User owner = userDao.findByEmail(user.getUsername());
-        return workoutDao.create(owner.getId());
+        var ownerUser = userDao.findByEmail(user.getUsername());
+        return workoutDao.create(ownerUser.getId());
     }
 }

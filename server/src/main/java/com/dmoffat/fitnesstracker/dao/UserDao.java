@@ -9,10 +9,10 @@ import static com.dmoffat.fitnesstracker.db.tables.User.USER;
 
 @Repository
 public class UserDao {
-    @Autowired private DSLContext context;
+    @Autowired private DSLContext db;
 
     public User findByEmail(String email) {
-        return context.selectFrom(USER)
+        return db.selectFrom(USER)
             .where(USER.EMAIL.eq(email))
             .fetchOneInto(User.class);
     }

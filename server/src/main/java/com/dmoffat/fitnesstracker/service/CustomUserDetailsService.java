@@ -1,7 +1,6 @@
 package com.dmoffat.fitnesstracker.service;
 
 import com.dmoffat.fitnesstracker.dao.UserDao;
-import com.dmoffat.fitnesstracker.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -21,7 +20,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userDao.findByEmail(username);
+        var user = userDao.findByEmail(username);
         if(user == null) {
             throw new UsernameNotFoundException("Username not found");
         }

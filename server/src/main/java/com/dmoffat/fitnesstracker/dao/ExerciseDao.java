@@ -12,16 +12,16 @@ import static com.dmoffat.fitnesstracker.db.tables.Exercise.EXERCISE;
 
 @Repository
 public class ExerciseDao {
-    @Autowired private DSLContext context;
+    @Autowired private DSLContext db;
 
     public List<Exercise> findAll() {
-        return context
+        return db
             .selectFrom(EXERCISE)
             .fetchInto(Exercise.class);
     }
 
     public Exercise findOne(Integer id) {
-        return context
+        return db
             .selectFrom(EXERCISE)
             .where(EXERCISE.ID.eq(UInteger.valueOf(id)))
             .fetchOneInto(Exercise.class);

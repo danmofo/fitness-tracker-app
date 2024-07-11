@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import java.util.List;
-
 @ControllerAdvice
 public class ErrorHandler {
 
@@ -19,7 +17,7 @@ public class ErrorHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseBody
     public ValidationErrorResponse handleValidationExceptions(MethodArgumentNotValidException ex) {
-        List<ValidationError> validationErrors = ex.getBindingResult().getAllErrors().stream()
+        var validationErrors = ex.getBindingResult().getAllErrors().stream()
             .map(error ->
                 new ValidationError(((FieldError) error).getField(), error.getDefaultMessage())
             )
