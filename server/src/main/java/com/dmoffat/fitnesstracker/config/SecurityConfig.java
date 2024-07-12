@@ -49,6 +49,7 @@ public class SecurityConfig {
     // Provide a custom mechanism for looking up users
     @Bean
     public AuthenticationManager authenticationManager(UserDetailsService userDetailsService) {
+        System.out.println("authenticationManager: " + userDetailsService.getClass().getSimpleName());
         var authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(userDetailsService);
         return new ProviderManager(authenticationProvider);
