@@ -25,6 +25,5 @@ public class ExerciseDao {
             .selectFrom(EXERCISE)
             .where(EXERCISE.ID.eq(UInteger.valueOf(id)))
             .fetchOneInto(Exercise.class);
-
     }
 }

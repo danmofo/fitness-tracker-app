@@ -4,6 +4,14 @@ public class Exercise {
     private Integer id;
     private String name;
 
+    public Exercise() {
+
+    }
+
+    public Exercise(Integer id) {
+        this.id = id;
+    }
+
     public Integer getId() {
         return id;
     }
