@@ -16,7 +16,8 @@ public class TestConfig {
      *
      * This means that the transaction started during test method execution is suspended, a new transaction is opened,
      * Spring session does its thing, then the transaction is committed, meaning the changes it makes never get rolled
-     * back. This results in a bunch of SPRING_SESSION records being created and left in the DB.
+     * back (because they are different transactions). This results in a bunch of SPRING_SESSION records being created
+     * and left in the DB.
      */
     @Bean("springSessionTransactionOperations")
     public TransactionOperations springSessionTransactionOperations() {
