@@ -1,12 +1,12 @@
 package com.dmoffat.fitnesstracker.controller;
 
+import com.dmoffat.fitnesstracker.model.User;
 import com.dmoffat.fitnesstracker.model.response.ApiResponse;
 import com.dmoffat.fitnesstracker.model.response.workout.CreateWorkoutResponse;
 import com.dmoffat.fitnesstracker.service.WorkoutService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 

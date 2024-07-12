@@ -1,7 +1,6 @@
 package com.dmoffat.fitnesstracker.controller;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.dmoffat.fitnesstracker.RequestHelpers;
 import org.jooq.DSLContext;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -9,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,27 +27,14 @@ class CreateWorkoutControllerIntegrationTest {
     @Test
     @Transactional
     void shouldReturnCorrectResponseWhenWorkoutCreated() throws Exception {
-        mockMvc.perform(authenticatedRequest("/api/v1/workout/"))
+        mockMvc.perform(authorisedRequest("/api/v1/workout/"))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.workoutId").isNotEmpty());
     }
 
-    private String createSessionId() throws Exception {
-        logger.info("Creating session ID");
-        var mapper = new ObjectMapper();
-        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+    private MockHttpServletRequestBuilder authorisedRequest(String endpoint) {
+        var sessionId = RequestHelpers.authenticate(mockMvc, "danmofo@gmail.com", "password");
 
-        var loginRequest = new AuthController.LoginRequest("danmofo@gmail.com", "password");
-
-        MockHttpServletRequestBuilder request = post("/api/v1/auth/login")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(mapper.writeValueAsString(loginRequest));
-
-        return mockMvc.perform(request).andReturn().getResponse().getHeader("X-Auth-Token");
-    }
-
-    private MockHttpServletRequestBuilder authenticatedRequest(String endpoint) throws Exception {
-        var sessionId = createSessionId();
         logger.debug("Performing authenticated request to: " + endpoint + " with session ID: " + sessionId);
         return post(endpoint)
             .header("X-Auth-Token", sessionId);
