@@ -16,7 +16,7 @@ import com.dmoffat.fitnesstracker.db.tables.WorkoutExercise;
 /**
  * Convenience access to all tables in ft.
  */
-@SuppressWarnings({ "all", "unchecked", "rawtypes" })
+@SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class Tables {
 
     /**
