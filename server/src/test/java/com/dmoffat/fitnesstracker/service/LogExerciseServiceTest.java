@@ -118,7 +118,7 @@ class LogExerciseServiceTest {
         var initialSets = 1;
         var duplicate = new WorkoutExercise(1);
         duplicate.setSets(initialSets);
-        when(workoutExerciseDao.findByWorkoutExerciseIdWeightRepsAndEquipment(any(WorkoutExercise.class)))
+        when(workoutExerciseDao.findByWorkoutExerciseByWeightRepsAndEquipment(any(WorkoutExercise.class)))
             .thenReturn(duplicate);
 
         var request = new LogExerciseRequest(

@@ -70,7 +70,7 @@ public class LogExerciseService {
         workoutExercise.setCreatedOn(LocalDateTime.now());
 
         // Find any matching records in the same workout, with the same weight, reps and equipment
-        var duplicate = workoutExerciseDao.findByWorkoutExerciseIdWeightRepsAndEquipment(workoutExercise);
+        var duplicate = workoutExerciseDao.findByWorkoutExerciseByWeightRepsAndEquipment(workoutExercise);
         if (duplicate == null) {
             logger.debug("This is a brand new workout exercise.");
             Integer workoutExerciseId = workoutExerciseDao.create(workoutExercise);
@@ -79,8 +79,8 @@ public class LogExerciseService {
         }
 
         logger.debug("This exercise has already been performed before, incrementing sets.");
-        workoutExercise.setSets(duplicate.getSets() + 1);
         workoutExercise.setId(duplicate.getId());
+        workoutExercise.setSets(duplicate.getSets() + 1);
         workoutExerciseDao.updateSets(duplicate.getId(), duplicate.getSets());
 
         return workoutExercise;

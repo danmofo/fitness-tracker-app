@@ -17,21 +17,18 @@ public class WorkoutDao {
     @Autowired private DSLContext db;
 
     public Workout create(Integer ownerUserId) {
-        var workout = db.newRecord(WORKOUT);
-        workout.setUserId(UInteger.valueOf(ownerUserId));
-        workout.setStartedOn(LocalDateTime.now());
-        workout.setCreatedOn(LocalDateTime.now());
-        workout.store();
+        // Create the record
+        var record = db.newRecord(WORKOUT);
+        record.setUserId(UInteger.valueOf(ownerUserId));
+        record.setStartedOn(LocalDateTime.now());
+        record.setCreatedOn(LocalDateTime.now());
+        record.store();
 
-        return workout.into(Workout.class);
-    }
-
-    public Workout findOne(Integer id) {
-        return db.select()
-            .from(WORKOUT)
-            .join(WORKOUT.user())
-            .where(WORKOUT.ID.eq(UInteger.valueOf(id)))
-            .fetchOneInto(Workout.class);
+        // Map into our model
+        var workout = new Workout();
+        workout.setId(record.getId().intValue());
+        workout.setUser(new User(ownerUserId));
+        return workout;
     }
 
     public Workout findOneWithUser(Integer id) {

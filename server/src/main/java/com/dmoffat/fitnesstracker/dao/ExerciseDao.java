@@ -6,19 +6,11 @@ import org.jooq.types.UInteger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 import static com.dmoffat.fitnesstracker.db.tables.Exercise.EXERCISE;
 
 @Repository
 public class ExerciseDao {
     @Autowired private DSLContext db;
-
-    public List<Exercise> findAll() {
-        return db
-            .selectFrom(EXERCISE)
-            .fetchInto(Exercise.class);
-    }
 
     public Exercise findOne(Integer id) {
         return db
