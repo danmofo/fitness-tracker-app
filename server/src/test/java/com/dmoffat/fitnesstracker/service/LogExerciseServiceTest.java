@@ -32,7 +32,7 @@ class LogExerciseServiceTest {
         var request = new LogExerciseRequest(
             1, // This doesn't exist
             1,
-            100,
+            100.0,
             1,
             3,
             "Do something",
@@ -54,7 +54,7 @@ class LogExerciseServiceTest {
         var request = new LogExerciseRequest(
             1, // User doesn't own this
             1,
-            100,
+            100.0,
             1,
             3,
             "Do something",
@@ -83,7 +83,7 @@ class LogExerciseServiceTest {
         var request = new LogExerciseRequest(
             1,
             1,
-            100,
+            100.2,
             1,
             3,
             "My notes",
@@ -94,7 +94,7 @@ class LogExerciseServiceTest {
         assertEquals(1, result.getId());
         assertEquals(1, result.getWorkout().getId());
         assertEquals(1, result.getExercise().getId());
-        assertEquals(100, result.getWeight());
+        assertEquals(100.2, result.getWeight());
         assertEquals(1, result.getSets());
         assertEquals(3, result.getReps());
         assertEquals("My notes", result.getNotes());
@@ -124,7 +124,7 @@ class LogExerciseServiceTest {
         var request = new LogExerciseRequest(
             1,
             1,
-            100,
+            100.0,
             1,
             3,
             "My notes",

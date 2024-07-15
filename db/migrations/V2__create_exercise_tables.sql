@@ -1,6 +1,7 @@
 create table ft.body_weight (
     id int unsigned auto_increment,
     user_id int unsigned not null,
+    `weight` float not null,
     logged_on date default (current_date),
     primary key(id),
     constraint body_weight_user_id_fk foreign key (user_id) references ft.user(id)
@@ -30,7 +31,7 @@ create table ft.workout_exercise (
     id int unsigned auto_increment,
     workout_id int unsigned not null,
     exercise_id int unsigned not null,
-    `weight` int unsigned not null default 1,
+    `weight` float not null default 1,
     `sets` int not null default 1,
     reps int not null default 0,
     notes text null,

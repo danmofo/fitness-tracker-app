@@ -32,7 +32,7 @@ public class LogExerciseService {
         this.workoutExerciseDao = workoutExerciseDao;
     }
 
-    public WorkoutExercise logExercise(@NotNull User workoutOwner, LogExerciseRequest request) {
+    public WorkoutExercise logExercise(@NotNull User workoutOwner, @NotNull LogExerciseRequest request) {
         logger.debug("Logging exercise for: " + workoutOwner.getEmail());
 
         logger.debug("Fetching workout (" + request.workoutId() + ") w/ User");

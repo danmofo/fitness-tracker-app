@@ -7,7 +7,7 @@ public class WorkoutExercise {
     private Integer id;
     private Workout workout;
     private Exercise exercise;
-    private Integer weight;
+    private Double weight;
     private Integer sets;
     private Integer reps;
     private String notes;
@@ -53,11 +53,11 @@ public class WorkoutExercise {
         this.exercise = exercise;
     }
 
-    public Integer getWeight() {
+    public Double getWeight() {
         return weight;
     }
 
-    public void setWeight(Integer weight) {
+    public void setWeight(Double weight) {
         this.weight = weight;
     }
 

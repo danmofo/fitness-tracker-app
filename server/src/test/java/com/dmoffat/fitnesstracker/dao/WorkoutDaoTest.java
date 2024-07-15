@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+
 import static com.dmoffat.fitnesstracker.db.tables.Workout.WORKOUT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -51,5 +53,24 @@ class WorkoutDaoTest {
         assertEquals(1, user.getId());
         assertEquals("danmofo@gmail.com", user.getEmail());
         assertEquals(newWorkout.getId(), workout.getId());
+    }
+
+    @Test
+    @Transactional
+    void shouldUpdateFinishedOnAndNotes() {
+        // Add a record for a user
+        var workout = workoutDao.create(1);
+
+        // Update the record
+        var newFinishedOnDate = LocalDateTime.of(2024, 1, 1, 1, 0);
+        workoutDao.updateFinishedOnAndNotes(workout.getId(), newFinishedOnDate, "Some notes");
+
+        // Make sure it was updated
+        var record = db.selectFrom(WORKOUT)
+            .where(WORKOUT.ID.eq(UInteger.valueOf(workout.getId())))
+            .fetchOne();
+
+        assertEquals("Some notes", record.getNotes());
+        assertEquals(newFinishedOnDate, record.getFinishedOn());
     }
 }

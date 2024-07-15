@@ -27,7 +27,7 @@ public class WorkoutExerciseDao {
         var record = db.newRecord(WORKOUT_EXERCISE);
         record.setExerciseId(UInteger.valueOf(newExercise.getExercise().getId()));
         record.setWorkoutId(UInteger.valueOf(newExercise.getWorkout().getId()));
-        record.setWeight(UInteger.valueOf(newExercise.getWeight()));
+        record.setWeight(newExercise.getWeight());
         record.setReps(newExercise.getReps());
         record.setSets(newExercise.getSets());
         record.setNotes(newExercise.getNotes());
@@ -48,7 +48,7 @@ public class WorkoutExerciseDao {
         SelectConditionStep<Record> select = db.select()
             .from(WORKOUT_EXERCISE)
             .where(WORKOUT_EXERCISE.WORKOUT_ID.eq(UInteger.valueOf(workoutExercise.getWorkout().getId())))
-            .and(WORKOUT_EXERCISE.WEIGHT.eq(UInteger.valueOf(workoutExercise.getWeight())))
+            .and(WORKOUT_EXERCISE.WEIGHT.eq(workoutExercise.getWeight()))
             .and(WORKOUT_EXERCISE.REPS.eq(workoutExercise.getReps()));
 
         if(workoutExercise.getEquipment() != null) {

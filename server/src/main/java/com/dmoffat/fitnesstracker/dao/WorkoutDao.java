@@ -44,7 +44,18 @@ public class WorkoutDao {
                 Workout workout = new Workout();
                 workout.setId(record.get(WORKOUT.ID).intValue());
                 workout.setUser(user);
+                workout.setNotes(record.get(WORKOUT.NOTES));
+                workout.setStartedOn(record.get(WORKOUT.STARTED_ON));
+                workout.setFinishedOn(record.get(WORKOUT.FINISHED_ON));
                 return workout;
             });
+    }
+
+    public void updateFinishedOnAndNotes(Integer id, LocalDateTime newFinishedOn, String notes) {
+        db.update(WORKOUT)
+            .set(WORKOUT.FINISHED_ON, newFinishedOn)
+            .set(WORKOUT.NOTES, notes)
+            .where(WORKOUT.ID.eq(UInteger.valueOf(id)))
+            .execute();
     }
 }

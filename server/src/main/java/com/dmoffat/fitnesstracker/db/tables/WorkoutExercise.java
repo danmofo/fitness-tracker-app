@@ -79,7 +79,7 @@ public class WorkoutExercise extends TableImpl<WorkoutExerciseRecord> {
     /**
      * The column <code>ft.workout_exercise.weight</code>.
      */
-    public final TableField<WorkoutExerciseRecord, UInteger> WEIGHT = createField(DSL.name("weight"), SQLDataType.INTEGERUNSIGNED.nullable(false).defaultValue(DSL.inline("1", SQLDataType.INTEGERUNSIGNED)), this, "");
+    public final TableField<WorkoutExerciseRecord, Double> WEIGHT = createField(DSL.name("weight"), SQLDataType.FLOAT.nullable(false).defaultValue(DSL.inline("1", SQLDataType.FLOAT)), this, "");
 
     /**
      * The column <code>ft.workout_exercise.sets</code>.

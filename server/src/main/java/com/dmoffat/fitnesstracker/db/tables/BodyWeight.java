@@ -70,6 +70,11 @@ public class BodyWeight extends TableImpl<BodyWeightRecord> {
     public final TableField<BodyWeightRecord, UInteger> USER_ID = createField(DSL.name("user_id"), SQLDataType.INTEGERUNSIGNED.nullable(false), this, "");
 
     /**
+     * The column <code>ft.body_weight.weight</code>.
+     */
+    public final TableField<BodyWeightRecord, Double> WEIGHT = createField(DSL.name("weight"), SQLDataType.FLOAT.nullable(false), this, "");
+
+    /**
      * The column <code>ft.body_weight.logged_on</code>.
      */
     public final TableField<BodyWeightRecord, LocalDate> LOGGED_ON = createField(DSL.name("logged_on"), SQLDataType.LOCALDATE.defaultValue(DSL.inline("curdate()", SQLDataType.LOCALDATE)), this, "");

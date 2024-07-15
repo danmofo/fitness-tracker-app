@@ -1,4 +1,4 @@
-package com.dmoffat.fitnesstracker.controller;
+package com.dmoffat.fitnesstracker.controller.workout;
 
 import com.dmoffat.fitnesstracker.RequestHelpers;
 import org.jooq.DSLContext;

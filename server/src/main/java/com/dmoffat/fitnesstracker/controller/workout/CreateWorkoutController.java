@@ -1,4 +1,4 @@
-package com.dmoffat.fitnesstracker.controller;
+package com.dmoffat.fitnesstracker.controller.workout;
 
 import com.dmoffat.fitnesstracker.model.User;
 import com.dmoffat.fitnesstracker.model.response.ApiResponse;

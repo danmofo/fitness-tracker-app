@@ -50,17 +50,31 @@ public class BodyWeightRecord extends UpdatableRecordImpl<BodyWeightRecord> {
     }
 
     /**
+     * Setter for <code>ft.body_weight.weight</code>.
+     */
+    public void setWeight(Double value) {
+        set(2, value);
+    }
+
+    /**
+     * Getter for <code>ft.body_weight.weight</code>.
+     */
+    public Double getWeight() {
+        return (Double) get(2);
+    }
+
+    /**
      * Setter for <code>ft.body_weight.logged_on</code>.
      */
     public void setLoggedOn(LocalDate value) {
-        set(2, value);
+        set(3, value);
     }
 
     /**
      * Getter for <code>ft.body_weight.logged_on</code>.
      */
     public LocalDate getLoggedOn() {
-        return (LocalDate) get(2);
+        return (LocalDate) get(3);
     }
 
     // -------------------------------------------------------------------------
@@ -86,11 +100,12 @@ public class BodyWeightRecord extends UpdatableRecordImpl<BodyWeightRecord> {
     /**
      * Create a detached, initialised BodyWeightRecord
      */
-    public BodyWeightRecord(UInteger id, UInteger userId, LocalDate loggedOn) {
+    public BodyWeightRecord(UInteger id, UInteger userId, Double weight, LocalDate loggedOn) {
         super(BodyWeight.BODY_WEIGHT);
 
         setId(id);
         setUserId(userId);
+        setWeight(weight);
         setLoggedOn(loggedOn);
         resetChangedOnNotNull();
     }

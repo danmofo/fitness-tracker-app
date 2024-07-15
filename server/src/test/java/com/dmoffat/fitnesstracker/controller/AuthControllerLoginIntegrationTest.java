@@ -32,7 +32,7 @@ class AuthControllerLoginIntegrationTest {
     @Test
     void shouldReturnErrorWhenCredentialsMissing() throws Exception {
         mockMvc.perform(loginRequest(null, null))
-            .andExpect(status().is4xxClientError())
+            .andExpect(status().isBadRequest())
             .andExpect(jsonPath("$.errorCode").value(ErrorCode.VALIDATION.toString()))
             .andExpect(jsonPath("$.validationErrors.length()").value(2))
             .andExpect(jsonPath("$.validationErrors[*].field", containsInAnyOrder("email", "password")))

@@ -38,7 +38,7 @@ class WorkoutExerciseDaoTest {
         var workoutExercise = db.newRecord(WORKOUT_EXERCISE);
         workoutExercise.setExerciseId(UInteger.valueOf(1));
         workoutExercise.setWorkoutId(workout.getId());
-        workoutExercise.setWeight(UInteger.valueOf(100));
+        workoutExercise.setWeight(100.0);
         workoutExercise.setReps(5);
         workoutExercise.setSets(1);
         workoutExercise.setCreatedOn(LocalDateTime.now());
@@ -68,7 +68,7 @@ class WorkoutExerciseDaoTest {
         workoutExercise.setWorkout(workout);
         workoutExercise.setExercise(new Exercise(1));
         workoutExercise.setEquipment(List.of("BELT", "SOMETHING_ELSE"));
-        workoutExercise.setWeight(100);
+        workoutExercise.setWeight(100.5);
         workoutExercise.setReps(5);
         workoutExercise.setSets(1);
         workoutExercise.setNotes("This is a note");
@@ -81,7 +81,7 @@ class WorkoutExerciseDaoTest {
         assertEquals("[\"BELT\", \"SOMETHING_ELSE\"]", savedRecord.getEquipment().data());
         assertEquals(workout.getId(), savedRecord.getWorkoutId().intValue());
         assertEquals(1, savedRecord.getExerciseId().intValue());
-        assertEquals(100, savedRecord.getWeight().intValue());
+        assertEquals(100.5, savedRecord.getWeight());
         assertEquals(5, savedRecord.getReps());
         assertEquals(1, savedRecord.getSets());
         assertEquals("This is a note", savedRecord.getNotes());
@@ -117,7 +117,7 @@ class WorkoutExerciseDaoTest {
         workoutExercise.setWorkout(workout);
         workoutExercise.setExercise(new Exercise(1));
         workoutExercise.setEquipment(equipment);
-        workoutExercise.setWeight(100);
+        workoutExercise.setWeight(100.0);
         workoutExercise.setReps(5);
         workoutExercise.setSets(1);
         workoutExercise.setNotes("This is a note");

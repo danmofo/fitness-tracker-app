@@ -1,9 +1,9 @@
 package com.dmoffat.fitnesstracker.controller.workout.exercise;
 
 import com.dmoffat.fitnesstracker.model.User;
-import com.dmoffat.fitnesstracker.model.WorkoutExercise;
 import com.dmoffat.fitnesstracker.model.request.workout.exercise.LogExerciseRequest;
 import com.dmoffat.fitnesstracker.model.response.ApiResponse;
+import com.dmoffat.fitnesstracker.model.response.workout.exercise.LogExerciseResponse;
 import com.dmoffat.fitnesstracker.service.LogExerciseService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +24,13 @@ public class LogExerciseController {
 
     @PostMapping("/api/v1/workout/{workoutId}/exercise/")
     public ResponseEntity<ApiResponse> handleLogExercise(
-            @RequestBody @Valid LogExerciseRequest request,
+            @Valid @RequestBody LogExerciseRequest request,
             @AuthenticationPrincipal User user) {
 
-        WorkoutExercise loggedExercise = logExerciseService.logExercise(user, request);
-        System.out.println(loggedExercise);
-
-        return ResponseEntity.ok(null);
+        var loggedExercise = logExerciseService.logExercise(user, request);
+        if(loggedExercise == null) {
+            return ResponseEntity.ok(new LogExerciseResponse(false));
+        }
+        return ResponseEntity.ok(new LogExerciseResponse(true, loggedExercise.getId()));
     }
 }

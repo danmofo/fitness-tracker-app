@@ -67,15 +67,15 @@ public class WorkoutExerciseRecord extends UpdatableRecordImpl<WorkoutExerciseRe
     /**
      * Setter for <code>ft.workout_exercise.weight</code>.
      */
-    public void setWeight(UInteger value) {
+    public void setWeight(Double value) {
         set(3, value);
     }
 
     /**
      * Getter for <code>ft.workout_exercise.weight</code>.
      */
-    public UInteger getWeight() {
-        return (UInteger) get(3);
+    public Double getWeight() {
+        return (Double) get(3);
     }
 
     /**
@@ -185,7 +185,7 @@ public class WorkoutExerciseRecord extends UpdatableRecordImpl<WorkoutExerciseRe
     /**
      * Create a detached, initialised WorkoutExerciseRecord
      */
-    public WorkoutExerciseRecord(UInteger id, UInteger workoutId, UInteger exerciseId, UInteger weight, Integer sets, Integer reps, String notes, JSON equipment, LocalDateTime createdOn, LocalDateTime updatedOn) {
+    public WorkoutExerciseRecord(UInteger id, UInteger workoutId, UInteger exerciseId, Double weight, Integer sets, Integer reps, String notes, JSON equipment, LocalDateTime createdOn, LocalDateTime updatedOn) {
         super(WorkoutExercise.WORKOUT_EXERCISE);
 
         setId(id);
