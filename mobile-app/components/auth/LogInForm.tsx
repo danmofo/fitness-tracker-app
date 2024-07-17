@@ -1,7 +1,10 @@
-import { Button, Text, TextInput, View } from "react-native";
+import { ActivityIndicator, Button, Text, TextInput, View } from "react-native";
 import { Controller, useForm } from "react-hook-form";
 import { formStyles } from "../styles";
 import FieldErrorMessage from "../form/FieldErrorMessage";
+import { login } from "@/api/auth";
+import { useState } from "react";
+import { ErrorCode } from "@/api/error-types";
 
 type LoginForm = {
     email: string,
@@ -9,20 +12,38 @@ type LoginForm = {
 }
 
 export default function LogInForm() {
+    const [loading, setLoading] = useState<boolean>(false);
+    const [authError, setAuthError] = useState<ErrorCode | null | undefined>();
+
     const { 
         control, 
         handleSubmit,
         formState: { errors, isValid },
+        getValues
     } = useForm<LoginForm>({
         mode: "all",
         defaultValues: {
-            email: '',
-            password: ''
+            email: 'danmofo@gmail.com',
+            password: 'password'
         }
     });
 
-    function handlePressLogInButton() {
+    async function handlePressLogInButton() {
         console.log('Logging in - valid? ', isValid);
+
+        setAuthError(null);
+        setLoading(true);
+        
+        const { success, errorCode, sessionToken } = await login(getValues());
+        if (!success) {
+            console.log('Failed to login', errorCode);
+            setLoading(false);
+            setAuthError(errorCode);
+            return;
+        }
+
+        console.log('Login success!', sessionToken);
+        setLoading(false);
     }
     
     return (
@@ -70,7 +91,18 @@ export default function LogInForm() {
                 <FieldErrorMessage fieldError={errors.password} />
             </View>
 
-            <Button title="Log in" onPress={handleSubmit(handlePressLogInButton)}/>
+            {
+                authError ?
+                <FieldErrorMessage fieldError={{type: authError, message: 'Invalid credentials'}} /> :
+                null
+            }
+
+            {
+                loading ? 
+                <ActivityIndicator size={32} /> :
+                <Button title="Log in" onPress={handleSubmit(handlePressLogInButton)}/>
+            }
+
         </>
     )
 }

@@ -2,7 +2,6 @@ import LogInForm from "@/components/auth/LogInForm";
 import Box from "@/components/layout/Box";
 import ScreenLayout from "@/components/layout/ScreenLayout";
 import Heading from "@/components/text/Heading";
-import { Text } from "react-native";
 
 export default function LogInScreen() {
     return (
