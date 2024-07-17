@@ -12,7 +12,7 @@ export default function HomepageScreen() {
                 <Text>This section will describe in a few words what you can do on this app.</Text>
                 <Text>To get started, either log in or sign up:</Text>
             </Box>
-            <Box paddingHorizontal={20}>
+            <Box flex={1} padding={20} clampChildrenToBottom>
                 <Button title="Log in" onPress={() => router.navigate("/auth/log-in")} />
                 <Button title="Sign up" onPress={() => router.navigate("/auth/sign-up")} />
             </Box>

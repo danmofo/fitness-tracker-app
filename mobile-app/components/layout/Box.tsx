@@ -1,13 +1,15 @@
 import { View } from "react-native"
 
 type BoxProps = {
-    children: React.ReactNode
+    children: React.ReactNode,
+    flex?: number,
+    clampChildrenToBottom?: boolean,
     padding?: number
     paddingHorizontal?: number
     paddingVertical?: number
 }
 
-export default function Box({ children, padding, paddingHorizontal, paddingVertical }: BoxProps) {
+export default function Box({ children, clampChildrenToBottom, flex, padding, paddingHorizontal, paddingVertical }: BoxProps) {
     const styles: any = {};
 
     if(padding) {
@@ -20,6 +22,15 @@ export default function Box({ children, padding, paddingHorizontal, paddingVerti
 
     if(paddingVertical) {
         styles.paddingVertical = paddingVertical;
+    }
+
+    if(flex) {
+        styles.flex = flex;
+    }
+
+    if(clampChildrenToBottom) {
+        styles.justifyContent = 'flex-end';
+        styles.alignItems = 'end';
     }
 
     return (
