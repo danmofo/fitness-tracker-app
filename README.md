@@ -11,6 +11,7 @@ Some useful scripts:
 - `./recreate-db`, deletes + recreates your local database
 - `./migrate`, run database migrations
 - `./server/generate-db-classes`, generates jOOQ models from the database
+- `./server/run-app`, runs the app
 - `./server/run-tets`, runs server tests
 
 ## Building
