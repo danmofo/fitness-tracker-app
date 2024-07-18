@@ -1,8 +1,9 @@
+import Button from "@/components/Button";
 import Box from "@/components/layout/Box";
 import ScreenLayout from "@/components/layout/ScreenLayout";
 import Heading from "@/components/text/Heading";
 import { router } from "expo-router";
-import { Button, Text } from "react-native";
+import { Text } from "react-native";
 
 export default function HomepageScreen() {
     return (
@@ -13,8 +14,8 @@ export default function HomepageScreen() {
                 <Text>To get started, either log in or sign up:</Text>
             </Box>
             <Box flex={1} padding={20} clampChildrenToBottom>
-                <Button title="Log in" onPress={() => router.navigate("/auth/log-in")} />
-                <Button title="Sign up" onPress={() => router.navigate("/auth/sign-up")} />
+                <Button title="Log in" href="/auth/log-in" />
+                <Button title="Sign up" href="/auth/sign-up" />
             </Box>
         </ScreenLayout>
     );

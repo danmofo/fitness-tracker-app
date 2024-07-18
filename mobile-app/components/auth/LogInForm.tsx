@@ -1,4 +1,4 @@
-import { ActivityIndicator, Button, Text, TextInput, View } from "react-native";
+import { ActivityIndicator, Text, TextInput, View } from "react-native";
 import { Controller, useForm } from "react-hook-form";
 import { formStyles } from "../styles";
 import FieldErrorMessage from "../form/FieldErrorMessage";
@@ -6,6 +6,7 @@ import { login } from "@/api/auth";
 import { useState } from "react";
 import { ErrorCode } from "@/api/error-types";
 import { useAuthStore } from "@/store/auth-store";
+import Button from "../Button";
 
 type LoginForm = {
     email: string,
