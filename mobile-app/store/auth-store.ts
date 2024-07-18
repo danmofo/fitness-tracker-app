@@ -3,8 +3,8 @@ import * as SecureStore from "expo-secure-store";
 import { StateStorage, createJSONStorage, persist } from "zustand/middleware";
 
 const secureStoreStorage: StateStorage = {
-    getItem: async function (name: string) {
-        return await SecureStore.getItemAsync(name);
+    getItem: function (name: string) {
+        return SecureStore.getItem(name);
     },
     setItem: async function (name: string, value: string) {
         return await SecureStore.setItemAsync(name, value);

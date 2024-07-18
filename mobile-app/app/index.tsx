@@ -2,10 +2,16 @@ import Button from "@/components/Button";
 import Box from "@/components/layout/Box";
 import ScreenLayout from "@/components/layout/ScreenLayout";
 import Heading from "@/components/text/Heading";
-import { router } from "expo-router";
+import { useAuthStore } from "@/store/auth-store";
+import { Redirect, router } from "expo-router";
 import { Text } from "react-native";
 
 export default function HomepageScreen() {
+    const sessionToken = useAuthStore(state => state.sessionToken);
+    if(sessionToken) {
+        return (<Redirect href="/dashboard/" />);
+    }
+
     return (
         <ScreenLayout screenHasHeader={false}>
             <Box padding={20}>
