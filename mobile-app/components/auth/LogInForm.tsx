@@ -5,13 +5,20 @@ import FieldErrorMessage from "../form/FieldErrorMessage";
 import { login } from "@/api/auth";
 import { useState } from "react";
 import { ErrorCode } from "@/api/error-types";
+import { useAuthStore } from "@/store/auth-store";
 
 type LoginForm = {
     email: string,
     password: string
 }
 
-export default function LogInForm() {
+type LoginFormProps = {
+    onAuthSuccess: () => void
+}
+
+export default function LogInForm({ onAuthSuccess }: LoginFormProps) {
+    const saveSessionToken = useAuthStore(state => state.saveSessionToken);
+
     const [loading, setLoading] = useState<boolean>(false);
     const [authError, setAuthError] = useState<ErrorCode | null | undefined>();
 
@@ -44,6 +51,8 @@ export default function LogInForm() {
 
         console.log('Login success!', sessionToken);
         setLoading(false);
+        saveSessionToken(sessionToken!);
+        onAuthSuccess();
     }
     
     return (
