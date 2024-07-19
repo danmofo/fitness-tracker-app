@@ -9,6 +9,9 @@ export const formStyles = StyleSheet.create({
     },
     input: {
         borderWidth: 1,
-        borderColor: '#CCC'
+        borderColor: '#CCC',
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        fontSize: 18
     }
 });
