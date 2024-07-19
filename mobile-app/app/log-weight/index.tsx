@@ -8,7 +8,7 @@ import Heading from "@/components/text/Heading";
 import { useAuthStore } from "@/store/auth-store";
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { ActivityIndicator, StyleSheet, Text, TextInput, View } from "react-native";
+import { ActivityIndicator, FlatList, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 
 // todo: We should load the user's most recent weight and pre-fill the input field
 
@@ -69,10 +69,8 @@ export default function LogWeightScreen() {
     
     return (
         <ScreenLayout screenHasHeader={false}>
-            <Box flex={1} padding={20}>
-                <Heading>Log weight</Heading>
-                <Text>Log your weight here</Text> 
-                
+            <Box padding={20}>
+                <Heading>Log weight</Heading>                
                 <View>
                     <Controller 
                         control={control}
@@ -103,11 +101,32 @@ export default function LogWeightScreen() {
                 }
             </Box>
 
-            <Box padding={20}>
-                <Heading>Weight history</Heading>
+            <Box>
+                <Box padding={20}>
+                    <Heading>Your weight history</Heading>
+                </Box>
+
+                <View style={styles.listHeadingContainer}>
+                    <Text style={styles.listHeading}>Weight</Text>
+                    <Text style={styles.listHeading}>Date</Text>
+                </View>
                 {
                     bodyWeights?.length ?
-                    bodyWeights.map(bw => { return (<Text>{bw.weight} - {bw.loggedOn}</Text>) }) :
+                    <FlatList
+                        data={bodyWeights}
+                        keyExtractor={(item) => {
+                            return item.id.toString()
+                        }}
+                        renderItem={({ item }) => {
+                            return (
+                                <View style={styles.listItem}>
+                                    <Text style={styles.listItemDataWeight}>{item.weight}kg</Text>
+                                    <Text style={styles.listItemDataLoggedOn}>{item.loggedOn}</Text>
+                                </View>
+                                
+                            )
+                        }}
+                    />:
                     <Text>You haven't logged any body weights yet.</Text>
                 }
             </Box>
@@ -125,5 +144,30 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         textAlignVertical: 'center',
         fontSize: 20
+    },
+    listItem: {
+        padding: 20,
+        flexDirection: 'row',
+        borderBottomWidth: 1,
+        borderColor: '#ddd'
+    },
+    listItemDataWeight: {
+        flex: 1,
+        
+    },
+    listItemDataLoggedOn: {
+        flex: 1,
+    },
+    listHeadingContainer: {
+        flexDirection: 'row',
+        paddingHorizontal: 20
+    },
+    listHeading: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        flex: 1,
+        borderBottomWidth: 1,
+        borderColor: '#ddd',
+        paddingVertical: 10
     }
 });
