@@ -44,7 +44,7 @@ public class BodyWeightDao {
     public List<UserBodyWeight> findAll(Integer userId) {
         return db.selectFrom(BODY_WEIGHT)
             .where(BODY_WEIGHT.USER_ID.eq(UInteger.valueOf(userId)))
-            .orderBy(BODY_WEIGHT.LOGGED_ON)
+            .orderBy(BODY_WEIGHT.LOGGED_ON.desc())
             .fetchInto(UserBodyWeight.class);
     }
 }
