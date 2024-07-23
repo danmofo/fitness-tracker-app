@@ -1,6 +1,10 @@
 import { API_BASE_URL } from "@/config";
 import { ErrorCode } from "./error-types";
 
+export type AuthenticatedRequest = {
+    sessionToken: string
+}
+
 type LoginRequest = {
     email: string,
     password: string

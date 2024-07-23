@@ -7,7 +7,8 @@ public class Exercise {
     private Type type;
 
     public enum Type {
-        FREE_WEIGHT
+        FREE_WEIGHT,
+        MACHINE
     }
 
     public Exercise() {

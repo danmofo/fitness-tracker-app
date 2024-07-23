@@ -19,7 +19,7 @@ export default function DashboardScreen() {
             <Box padding={20}>
                 <Heading>Log workout</Heading>
                 <Text>Here you can log your workout</Text>
-                <Button title="Start workout" href="start-workout" />
+                <Button title="Start workout" href="/log-workout/" />
             </Box>
             <Box padding={20}>
                 <Heading>Log weight</Heading>

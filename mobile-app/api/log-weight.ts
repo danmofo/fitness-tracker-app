@@ -1,8 +1,5 @@
 import { API_BASE_URL } from "@/config";
-
-type AuthenticatedRequest = {
-    sessionToken: string
-}
+import { AuthenticatedRequest } from "./auth";
 
 type LogWeightRequest = {
     weight: number
