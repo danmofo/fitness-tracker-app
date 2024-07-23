@@ -3,7 +3,9 @@ A fitness tracking application built using Java, MySQL and React native.
 I'm documenting my progress on my website:
 - [Part 1](https://www.dmoffat.com/writing/2024/07/building-a-fitness-app-with-java-part-1)
 - [Part 2](https://www.dmoffat.com/writing/2024/07/building-a-fitness-app-with-java-part-2)
-- [Part 3](https://www.dmoffat.com/writing/2024/07/building-a-fitness-app-with-java-part-2)
+- [Part 3](https://www.dmoffat.com/writing/2024/07/building-a-fitness-app-with-java-part-3)
+- [Part 4](https://www.dmoffat.com/writing/2024/07/building-a-fitness-app-with-java-part-4)
+- [Part 5](https://www.dmoffat.com/writing/2024/07/building-a-fitness-app-with-java-part-5)
 
 ## Developing
 
