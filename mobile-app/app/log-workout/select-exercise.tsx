@@ -39,7 +39,7 @@ export default function SelectExerciseScreen() {
     const filteredExercises = filterExercises(exercises, query);
 
     return (
-        <ScreenLayout screenHasHeader={false}>
+        <ScreenLayout screenHasHeader={true}>
             <Box padding={20}>
                 <SearchBox 
                     query={query}  
