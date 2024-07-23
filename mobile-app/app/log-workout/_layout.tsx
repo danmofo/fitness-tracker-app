@@ -20,7 +20,7 @@ export default function LogWorkoutLayout() {
             <Stack.Screen 
                 name="add-exercise-to-workout"
                 options={{
-                    title: 'Add exercise to workout'
+                    title: 'Add sets for exercise'
                 }}
             />
         </Stack>

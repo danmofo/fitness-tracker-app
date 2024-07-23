@@ -6,7 +6,7 @@ import { Link, Stack, useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect } from "react";
 import { Text } from "react-native";
 
-export default function WorkoutAddExerciseScreen() {
+export default function ExerciseSummaryScreen() {
     const workoutStore = useWorkoutStore();
     const router = useRouter();
     const params = useLocalSearchParams()

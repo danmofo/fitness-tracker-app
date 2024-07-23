@@ -33,7 +33,7 @@ export default function SelectExerciseScreen() {
     function handleSelectExercise(selectedExercise: Exercise) {
         console.log('Selected', selectedExercise);
         setCurrentExercise(selectedExercise);
-        router.navigate('/log-workout/workout-add-exercise');
+        router.navigate('/log-workout/exercise-summary');
     }
 
     const filteredExercises = filterExercises(exercises, query);
