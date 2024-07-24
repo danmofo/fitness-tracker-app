@@ -1,6 +1,7 @@
 import Button from "@/components/Button";
 import Box from "@/components/layout/Box";
 import ScreenLayout from "@/components/layout/ScreenLayout";
+import CompletedSets from "@/components/log-workout/CompletedSets";
 import { useWorkoutStore } from "@/store/workout-store";
 import { Link, Stack, useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect } from "react";
@@ -25,11 +26,9 @@ export default function ExerciseSummaryScreen() {
                 }} 
             />
             <Box padding={20}>
-                <Text>The current exercise is {workoutStore.currentExercise?.name}</Text>
-
                 <Button title="Add set" href="/log-workout/add-exercise-to-workout" />
                 
-                <Text>Summary of exercises goes here....</Text>
+                <CompletedSets exercise={workoutStore.currentExercise} />
             </Box>
         </ScreenLayout>
     )
