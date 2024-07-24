@@ -22,7 +22,6 @@ export default function CompletedSets({ exercise, workoutId }: CompletedExercise
                 exerciseId: exercise!.id
             });
             setCompletedSets(completedSets);
-
         })();
     }, [])
 
@@ -31,6 +30,5 @@ export default function CompletedSets({ exercise, workoutId }: CompletedExercise
             <Heading>Completed sets for {String(exercise?.name)}</Heading>
             <Text>There are {completedSets?.length} completed sets for this exercise</Text>
         </View>
-        
     )
 }

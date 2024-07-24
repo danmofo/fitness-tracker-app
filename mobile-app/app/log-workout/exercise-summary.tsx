@@ -3,9 +3,8 @@ import Box from "@/components/layout/Box";
 import ScreenLayout from "@/components/layout/ScreenLayout";
 import CompletedSets from "@/components/log-workout/CompletedSets";
 import { useWorkoutStore } from "@/store/workout-store";
-import { Link, Stack, useLocalSearchParams, useRouter } from "expo-router";
+import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect } from "react";
-import { Text } from "react-native";
 
 export default function ExerciseSummaryScreen() {
     const workoutStore = useWorkoutStore();
@@ -30,7 +29,7 @@ export default function ExerciseSummaryScreen() {
                 
                 <CompletedSets 
                     exercise={workoutStore.currentExercise} 
-                    workoutId={workoutStore?.workoutId}
+                    workoutId={workoutStore.workoutId}
                 />
             </Box>
         </ScreenLayout>

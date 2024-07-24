@@ -30,9 +30,8 @@ public class ListWorkoutExerciseController {
 
     @GetMapping("/api/v1/workout/{workoutId}/exercise/{exerciseId}")
     public ResponseEntity<ApiResponse> handleListCompletedSetsForExercise(
-        @PathVariable Integer workoutId, @PathVariable Integer exerciseId, @AuthenticationPrincipal User user) {
+            @PathVariable Integer workoutId, @PathVariable Integer exerciseId, @AuthenticationPrincipal User user) {
         var completedSets = workoutService.listCompletedSetsForExercise(user, exerciseId, workoutId);
-
         return ResponseEntity.ok(new ListCompletedSetsForExercise(completedSets));
     }
 }
