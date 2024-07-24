@@ -3,14 +3,16 @@ package com.dmoffat.fitnesstracker.model.response.workout;
 import com.dmoffat.fitnesstracker.model.ExerciseWithCompletedSets;
 import com.dmoffat.fitnesstracker.model.response.ApiResponse;
 
-public class ListWorkoutExerciseResponse implements ApiResponse {
-    private final ExerciseWithCompletedSets exercises;
+import java.util.List;
 
-    public ListWorkoutExerciseResponse(ExerciseWithCompletedSets exercises) {
+public class ListWorkoutExerciseResponse implements ApiResponse {
+    private final List<ExerciseWithCompletedSets> exercises;
+
+    public ListWorkoutExerciseResponse(List<ExerciseWithCompletedSets> exercises) {
         this.exercises = exercises;
     }
 
-    public ExerciseWithCompletedSets getExercises() {
+    public List<ExerciseWithCompletedSets> getExercises() {
         return exercises;
     }
 }

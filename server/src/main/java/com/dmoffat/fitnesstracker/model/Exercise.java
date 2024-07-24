@@ -1,5 +1,7 @@
 package com.dmoffat.fitnesstracker.model;
 
+import java.util.Objects;
+
 public class Exercise {
     private Integer id;
     private String name;
@@ -49,5 +51,20 @@ public class Exercise {
 
     public void setType(Type type) {
         this.type = type;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Exercise exercise = (Exercise) o;
+
+        return Objects.equals(id, exercise.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
     }
 }
