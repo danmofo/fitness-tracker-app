@@ -28,7 +28,10 @@ export default function ExerciseSummaryScreen() {
             <Box padding={20}>
                 <Button title="Add set" href="/log-workout/add-exercise-to-workout" />
                 
-                <CompletedSets exercise={workoutStore.currentExercise} />
+                <CompletedSets 
+                    exercise={workoutStore.currentExercise} 
+                    workoutId={workoutStore?.workoutId}
+                />
             </Box>
         </ScreenLayout>
     )

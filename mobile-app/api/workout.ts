@@ -31,13 +31,13 @@ type ListWorkoutExercisesResponse = {
     exercises: ExerciseWithCompletedSets[]
 }
 
-type ExerciseWithCompletedSets = {
+export type ExerciseWithCompletedSets = {
     id: number,
     name: string,
     completed: CompletedSet[]
 }
 
-type CompletedSet = {
+export type CompletedSet = {
     id: number,
     weight: number,
     sets: number,
