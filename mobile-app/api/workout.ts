@@ -46,7 +46,7 @@ type CompletedSet = {
     equipment?: string[]
 }
 
-export async function listWorkoutExercises(request: ListWorkoutExercisesRequest) : Promise<ListWorkoutExercisesResponse> {
+export async function listWorkoutExercises(request: ListWorkoutExercisesRequest): Promise<ListWorkoutExercisesResponse> {
     try {
         const response = await fetch(`${API_BASE_URL}/workout/${request.workoutId}/exercise`, {
             method: 'GET',
@@ -60,6 +60,33 @@ export async function listWorkoutExercises(request: ListWorkoutExercisesRequest)
         console.log(e);
         return {
             exercises: []
+        }
+    }
+}
+
+type ListCompletedSetsForExerciseRequest = {
+    workoutId: number,
+    exerciseId: number
+} & AuthenticatedRequest;
+
+type ListCompletedSetsForExerciseResponse = {
+    completedSets: CompletedSet[]
+}
+
+export async function listCompletedSetsForExercise(request: ListCompletedSetsForExerciseRequest): Promise<ListCompletedSetsForExerciseResponse> {
+    try {
+        const response = await fetch(`${API_BASE_URL}/workout/${request.workoutId}/exercise/${request.exerciseId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Auth-Token': request.sessionToken
+            }
+        });
+        return (await response.json());
+    } catch (e) {
+        console.log(e);
+        return {
+            completedSets: []
         }
     }
 }

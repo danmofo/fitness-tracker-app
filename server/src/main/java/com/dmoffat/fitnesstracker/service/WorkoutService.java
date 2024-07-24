@@ -1,5 +1,6 @@
 package com.dmoffat.fitnesstracker.service;
 
+import com.dmoffat.fitnesstracker.dao.ExerciseDao;
 import com.dmoffat.fitnesstracker.dao.WorkoutDao;
 import com.dmoffat.fitnesstracker.dao.WorkoutExerciseDao;
 import com.dmoffat.fitnesstracker.model.*;
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class WorkoutService {
+    @Autowired private ExerciseDao exerciseDao;
     @Autowired private WorkoutDao workoutDao;
     @Autowired private WorkoutExerciseDao workoutExerciseDao;
 
@@ -35,6 +37,28 @@ public class WorkoutService {
         workoutDao.updateFinishedOnAndNotes(workoutId, LocalDateTime.now(), notes);
 
         return true;
+    }
+
+    public List<CompletedSet> listCompletedSetsForExercise(
+            @NotNull User user,
+            @NotNull Integer exerciseId,
+            @NotNull Integer workoutId) {
+        var workout = workoutDao.findOneWithUser(workoutId);
+        if (workout == null) {
+            return null;
+        }
+
+        if (!workout.getUser().equals(user)) {
+            return null;
+        }
+
+        // Fetch all the exercises for this workout + filter them
+        // todo: Do the filtering on the database side - I'm just being lazy.
+        return workoutExerciseDao.findAllByWorkoutId(workoutId)
+            .stream()
+            .filter(workoutExercise -> workoutExercise.getExercise().getId().equals(exerciseId))
+            .map(this::mapFromWorkoutExercise)
+            .toList();
     }
 
     public List<ExerciseWithCompletedSets> listExercisesForWorkoutId(@NotNull User user, @NotNull Integer workoutId) {
