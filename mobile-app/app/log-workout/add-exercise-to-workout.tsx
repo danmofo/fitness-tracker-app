@@ -1,11 +1,15 @@
+import { logExercise } from "@/api/workout";
 import Button from "@/components/Button";
 import FieldErrorMessage from "@/components/form/FieldErrorMessage";
 import Box from "@/components/layout/Box";
 import ScreenLayout from "@/components/layout/ScreenLayout";
 import { formStyles } from "@/components/styles";
 import { useAuthStore } from "@/store/auth-store";
+import { useWorkoutStore } from "@/store/workout-store";
+import { router } from "expo-router";
+import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { Text, TextInput, View } from "react-native";
+import { ActivityIndicator, Text, TextInput, View } from "react-native";
 
 
 export type AddExerciseForm = {
@@ -18,11 +22,13 @@ export type AddExerciseForm = {
 
 export default function AddExerciseToWorkoutScreen() {
     const authStore = useAuthStore();
+    const workoutStore = useWorkoutStore();
+    const [isLoading, setIsLoading] = useState(false);
 
     const { 
         control, 
         handleSubmit,
-        formState: { errors, isValid },
+        formState: { errors },
         getValues
     } = useForm<AddExerciseForm>({
         mode: "all",
@@ -37,6 +43,28 @@ export default function AddExerciseToWorkoutScreen() {
 
     async function handleAddSet() {
         console.log('Adding set', getValues());
+        setIsLoading(true);
+
+        const formValues = getValues();
+        const { success } = await logExercise({
+            workoutId: workoutStore.workoutId!,
+            exerciseId: workoutStore.currentExercise?.id!,
+            weight: formValues.weight,
+            sets: formValues.sets,
+            reps: formValues.reps,
+            notes: formValues.notes,
+            equipment: formValues.equipment.split(','),
+            sessionToken: authStore.sessionToken
+        });
+
+        if(!success) {
+            console.error('Failed to log workout');
+            // todo: Handle validation errors.
+        } else {
+            router.dismiss();
+        }
+
+        setIsLoading(false);
     }
 
     return (
@@ -48,7 +76,12 @@ export default function AddExerciseToWorkoutScreen() {
                     <Controller 
                         control={control}
                         name="weight"
-                        rules={{}} 
+                        rules={{
+                            min: {
+                                value: 1,
+                                message: 'Weight must be at least 1KG'
+                            }
+                        }} 
                         render={({ field: { onChange, value } }) => (
                             <TextInput 
                                 value={String(value)}
@@ -132,10 +165,15 @@ export default function AddExerciseToWorkoutScreen() {
                     <FieldErrorMessage fieldError={errors.equipment} />
                 </View>
 
-                <Button 
-                    title="Add"
-                    onPress={handleSubmit(handleAddSet)}
-                />
+                {
+                    isLoading ? 
+                    <ActivityIndicator size={32} /> :
+                    <Button 
+                        title="Add"
+                        onPress={handleSubmit(handleAddSet)}
+                    />
+                }
+                
             </Box>
         </ScreenLayout>
     )

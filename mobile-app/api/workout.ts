@@ -90,3 +90,37 @@ export async function listCompletedSetsForExercise(request: ListCompletedSetsFor
         }
     }
 }
+
+type LogExerciseRequest = {
+    workoutId: number,
+    exerciseId: number,
+    weight: number,
+    sets: number,
+    reps: number,
+    notes?: string,
+    equipment?: string[]
+} & AuthenticatedRequest;
+
+type LogExerciseResponse = {
+    success: boolean,
+    workoutExerciseId?: number
+} 
+
+export async function logExercise(request: LogExerciseRequest): Promise<LogExerciseResponse> {
+    try {
+        const response = await fetch(`${API_BASE_URL}/workout/${request.workoutId}/exercise/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Auth-Token': request.sessionToken
+            },
+            body: JSON.stringify(request)
+        });
+        return (await response.json());
+    } catch (e) {
+        console.log(e);
+        return {
+            success: false
+        }
+    }
+}
