@@ -81,7 +81,7 @@ public class LogExerciseService {
         logger.debug("This exercise has already been performed before, incrementing sets.");
         workoutExercise.setId(duplicate.getId());
         workoutExercise.setSets(duplicate.getSets() + 1);
-        workoutExerciseDao.updateSets(duplicate.getId(), duplicate.getSets());
+        workoutExerciseDao.updateSets(duplicate.getId(), workoutExercise.getSets());
 
         return workoutExercise;
     }
