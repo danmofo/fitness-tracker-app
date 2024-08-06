@@ -12,11 +12,13 @@ export default function ExerciseSummaryScreen() {
     const workoutStore = useWorkoutStore();
     const router = useRouter();
     const params = useLocalSearchParams()
-
     const authStore = useAuthStore();
     const [completedSets, setCompletedSets] = useState<CompletedSet[]>([]);
 
     useEffect(() => {
+        router.setParams({
+            title: workoutStore.currentExercise?.name
+        });
 
         async function init() {
             const { completedSets } = await listCompletedSetsForExercise({
@@ -30,14 +32,6 @@ export default function ExerciseSummaryScreen() {
         init();
     }, []);
 
-    useEffect(() => {
-        router.setParams({
-            title: workoutStore.currentExercise?.name
-        });
-    }, []);
-
-    
-    
     return (
         <ScreenLayout screenHasHeader={true}>
             <Stack.Screen 

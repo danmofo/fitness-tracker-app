@@ -5,7 +5,6 @@ import com.dmoffat.fitnesstracker.model.request.workout.FinishWorkoutRequest;
 import com.dmoffat.fitnesstracker.model.response.ApiResponse;
 import com.dmoffat.fitnesstracker.model.response.workout.FinishWorkoutResponse;
 import com.dmoffat.fitnesstracker.service.WorkoutService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -26,7 +25,7 @@ public class FinishWorkoutController {
     @PostMapping("/api/v1/workout/{workoutId}/finish")
     public ResponseEntity<ApiResponse> handleFinishWorkout(
             @PathVariable Integer workoutId,
-            @Valid @RequestBody FinishWorkoutRequest request,
+            @RequestBody FinishWorkoutRequest request,
             @AuthenticationPrincipal User user) {
 
         boolean result = workoutService.finishWorkout(user, workoutId, request.notes());

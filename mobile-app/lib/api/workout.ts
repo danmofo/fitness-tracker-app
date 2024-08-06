@@ -23,6 +23,34 @@ export async function startWorkout(request: AuthenticatedRequest): Promise<Start
     }
 }
 
+type FinishWorkoutResponse = {
+    success: boolean
+}
+
+type FinishWorkoutRequest = {
+    workoutId: number
+} & AuthenticatedRequest;
+
+
+export async function finishWorkout(request: FinishWorkoutRequest): Promise<FinishWorkoutResponse> {
+    try {
+        const response = await fetch(`${API_BASE_URL}/workout/${request.workoutId}/finish`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Auth-Token': request.sessionToken
+            },
+            body: JSON.stringify({})
+        });
+        return (await response.json());
+    } catch (e) {
+        console.log(e);
+        return {
+            success: false
+        }
+    }
+}
+
 type ListWorkoutExercisesRequest = {
     workoutId: number
 } & AuthenticatedRequest;

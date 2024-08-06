@@ -1,16 +1,11 @@
 import { FlatList, Pressable, StyleSheet, Text, View } from "react-native"
-import { Exercise } from "@/lib/api/exercise"
-import { useEffect, useState } from "react"
-import { CompletedSet, listCompletedSetsForExercise } from "@/lib/api/workout"
-import { useAuthStore } from "@/lib/store/auth-store"
+import { CompletedSet } from "@/lib/api/workout"
 
 type CompletedExercisesProps = {
-    completedSets: CompletedSet[],
-    exercise?: Exercise
+    completedSets: CompletedSet[]
 }
 
-export default function CompletedSets({ completedSets, exercise }: CompletedExercisesProps) {
-
+export default function CompletedSets({ completedSets }: CompletedExercisesProps) {
     return (
         <View>
             <View style={styles.tableHeader}>
