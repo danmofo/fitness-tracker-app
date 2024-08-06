@@ -1,10 +1,10 @@
-import { startWorkout } from "@/api/workout";
-import Button from "@/components/Button";
-import Box from "@/components/layout/Box";
-import ScreenLayout from "@/components/layout/ScreenLayout";
-import Heading from "@/components/text/Heading";
-import { useAuthStore } from "@/store/auth-store";
-import { useWorkoutStore } from "@/store/workout-store";
+import { startWorkout } from "@/lib/api/workout";
+import Button from "@/lib/components/Button";
+import Box from "@/lib/components/layout/Box";
+import ScreenLayout from "@/lib/components/layout/ScreenLayout";
+import Heading from "@/lib/components/text/Heading";
+import { useAuthStore } from "@/lib/store/auth-store";
+import { useWorkoutStore } from "@/lib/store/workout-store";
 import { router } from "expo-router";
 import { useState } from "react";
 import { Alert, Text, View } from "react-native";

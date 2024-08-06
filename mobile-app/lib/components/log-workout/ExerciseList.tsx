@@ -1,4 +1,4 @@
-import { Exercise } from "@/api/exercise";
+import { Exercise } from "@/lib/api/exercise";
 import { FlatList, Pressable, StyleSheet, Text, View } from "react-native"
 
 type ExerciseListProps = {

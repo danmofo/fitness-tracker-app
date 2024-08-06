@@ -1,7 +1,7 @@
-import LogInForm from "@/components/auth/LogInForm";
-import Box from "@/components/layout/Box";
-import ScreenLayout from "@/components/layout/ScreenLayout";
-import Heading from "@/components/text/Heading";
+import LogInForm from "@/lib/components/auth/LogInForm";
+import Box from "@/lib/components/layout/Box";
+import ScreenLayout from "@/lib/components/layout/ScreenLayout";
+import Heading from "@/lib/components/text/Heading";
 import { router } from "expo-router";
 
 export default function LogInScreen() {

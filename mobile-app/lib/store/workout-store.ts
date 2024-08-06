@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createJSONStorage, persist } from "zustand/middleware";
-import { Exercise } from "@/api/exercise";
+import { Exercise } from "@/lib/api/exercise";
 
 export type WorkoutState = {
     workoutId: number | null,

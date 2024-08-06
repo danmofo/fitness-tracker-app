@@ -1,8 +1,8 @@
-import Button from "@/components/Button";
-import Box from "@/components/layout/Box";
-import ScreenLayout from "@/components/layout/ScreenLayout";
-import CompletedSets from "@/components/log-workout/CompletedSets";
-import { useWorkoutStore } from "@/store/workout-store";
+import Button from "@/lib/components/Button";
+import Box from "@/lib/components/layout/Box";
+import ScreenLayout from "@/lib/components/layout/ScreenLayout";
+import CompletedSets from "@/lib/components/log-workout/CompletedSets";
+import { useWorkoutStore } from "@/lib/store/workout-store";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect } from "react";
 

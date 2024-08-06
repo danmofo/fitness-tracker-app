@@ -1,8 +1,8 @@
 import { FlatList, Pressable, StyleSheet, Text, View } from "react-native"
-import { Exercise } from "@/api/exercise"
+import { Exercise } from "@/lib/api/exercise"
 import { useEffect, useState } from "react"
-import { CompletedSet, listCompletedSetsForExercise } from "@/api/workout"
-import { useAuthStore } from "@/store/auth-store"
+import { CompletedSet, listCompletedSetsForExercise } from "@/lib/api/workout"
+import { useAuthStore } from "@/lib/store/auth-store"
 
 type CompletedExercisesProps = {
     exercise: Exercise | null,

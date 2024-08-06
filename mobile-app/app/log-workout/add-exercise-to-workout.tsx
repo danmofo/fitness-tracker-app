@@ -1,16 +1,15 @@
-import { logExercise } from "@/api/workout";
-import Button from "@/components/Button";
-import FieldErrorMessage from "@/components/form/FieldErrorMessage";
-import Box from "@/components/layout/Box";
-import ScreenLayout from "@/components/layout/ScreenLayout";
-import { formStyles } from "@/components/styles";
-import { useAuthStore } from "@/store/auth-store";
-import { useWorkoutStore } from "@/store/workout-store";
+import { logExercise } from "@/lib/api/workout";
+import Button from "@/lib/components/Button";
+import FieldErrorMessage from "@/lib/components/form/FieldErrorMessage";
+import Box from "@/lib/components/layout/Box";
+import ScreenLayout from "@/lib/components/layout/ScreenLayout";
+import { formStyles } from "@/lib/components/styles";
+import { useAuthStore } from "@/lib/store/auth-store";
+import { useWorkoutStore } from "@/lib/store/workout-store";
 import { router } from "expo-router";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { ActivityIndicator, Text, TextInput, View } from "react-native";
-
 
 export type AddExerciseForm = {
     weight: number,

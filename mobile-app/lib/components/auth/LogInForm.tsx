@@ -2,10 +2,10 @@ import { ActivityIndicator, Text, TextInput, View } from "react-native";
 import { Controller, useForm } from "react-hook-form";
 import { formStyles } from "../styles";
 import FieldErrorMessage from "../form/FieldErrorMessage";
-import { login } from "@/api/auth";
+import { login } from "@/lib/api/auth";
 import { useState } from "react";
-import { ErrorCode } from "@/api/error-types";
-import { useAuthStore } from "@/store/auth-store";
+import { ErrorCode } from "@/lib/api/error-types";
+import { useAuthStore } from "@/lib/store/auth-store";
 import Button from "../Button";
 
 type LoginForm = {

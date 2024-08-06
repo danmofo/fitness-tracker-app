@@ -1,12 +1,12 @@
-import { Exercise, listExercises } from "@/api/exercise";
-import Button from "@/components/Button";
-import Box from "@/components/layout/Box";
-import ScreenLayout from "@/components/layout/ScreenLayout";
-import ExerciseList from "@/components/log-workout/ExerciseList";
-import SearchBox from "@/components/log-workout/SearchBox";
-import Heading from "@/components/text/Heading";
-import { useAuthStore } from "@/store/auth-store";
-import { useWorkoutStore } from "@/store/workout-store";
+import { Exercise, listExercises } from "@/lib/api/exercise";
+import Button from "@/lib/components/Button";
+import Box from "@/lib/components/layout/Box";
+import ScreenLayout from "@/lib/components/layout/ScreenLayout";
+import ExerciseList from "@/lib/components/log-workout/ExerciseList";
+import SearchBox from "@/lib/components/log-workout/SearchBox";
+import Heading from "@/lib/components/text/Heading";
+import { useAuthStore } from "@/lib/store/auth-store";
+import { useWorkoutStore } from "@/lib/store/workout-store";
 import { router } from "expo-router";
 import { useEffect, useState } from "react";
 
