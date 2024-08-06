@@ -1,21 +1,42 @@
+import { CompletedSet, listCompletedSetsForExercise } from "@/lib/api/workout";
 import Button from "@/lib/components/Button";
 import Box from "@/lib/components/layout/Box";
 import ScreenLayout from "@/lib/components/layout/ScreenLayout";
 import CompletedSets from "@/lib/components/log-workout/CompletedSets";
+import { useAuthStore } from "@/lib/store/auth-store";
 import { useWorkoutStore } from "@/lib/store/workout-store";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function ExerciseSummaryScreen() {
     const workoutStore = useWorkoutStore();
     const router = useRouter();
     const params = useLocalSearchParams()
 
+    const authStore = useAuthStore();
+    const [completedSets, setCompletedSets] = useState<CompletedSet[]>([]);
+
+    useEffect(() => {
+
+        async function init() {
+            const { completedSets } = await listCompletedSetsForExercise({
+                sessionToken: authStore.sessionToken,
+                workoutId: workoutStore.workoutId!,
+                exerciseId: workoutStore.currentExercise!.id
+            });
+            setCompletedSets(completedSets);
+        }
+
+        init();
+    }, []);
+
     useEffect(() => {
         router.setParams({
             title: workoutStore.currentExercise?.name
         });
     }, []);
+
+    
     
     return (
         <ScreenLayout screenHasHeader={true}>
@@ -27,10 +48,7 @@ export default function ExerciseSummaryScreen() {
             <Box padding={20}>
                 <Button title="Add set" href="/log-workout/add-exercise-to-workout" />
                 
-                <CompletedSets 
-                    exercise={workoutStore.currentExercise} 
-                    workoutId={workoutStore.workoutId}
-                />
+                <CompletedSets completedSets={completedSets} />
             </Box>
         </ScreenLayout>
     )

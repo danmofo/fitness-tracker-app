@@ -5,24 +5,11 @@ import { CompletedSet, listCompletedSetsForExercise } from "@/lib/api/workout"
 import { useAuthStore } from "@/lib/store/auth-store"
 
 type CompletedExercisesProps = {
-    exercise: Exercise | null,
-    workoutId: number | null
+    completedSets: CompletedSet[],
+    exercise?: Exercise
 }
 
-export default function CompletedSets({ exercise, workoutId }: CompletedExercisesProps) {
-    const authStore = useAuthStore();
-    const [completedSets, setCompletedSets] = useState<CompletedSet[]>([]);
-
-    useEffect(() => {
-        (async () => {
-            const { completedSets } = await listCompletedSetsForExercise({
-                sessionToken: authStore.sessionToken,
-                workoutId: workoutId,
-                exerciseId: exercise!.id
-            });
-            setCompletedSets(completedSets);
-        })();
-    }, []);
+export default function CompletedSets({ completedSets, exercise }: CompletedExercisesProps) {
 
     return (
         <View>
