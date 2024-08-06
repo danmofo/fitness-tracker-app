@@ -23,6 +23,13 @@ export default function LogWorkoutLayout() {
                     title: 'Add sets for exercise'
                 }}
             />
+
+            <Stack.Screen 
+                name="summary"
+                options={{
+                    headerShown: false
+                }}
+            />
         </Stack>
     )
 }

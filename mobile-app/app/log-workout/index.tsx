@@ -6,21 +6,35 @@ import Heading from "@/components/text/Heading";
 import { useAuthStore } from "@/store/auth-store";
 import { useWorkoutStore } from "@/store/workout-store";
 import { router } from "expo-router";
-import { Alert } from "react-native";
+import { useState } from "react";
+import { Alert, Text, View } from "react-native";
 
 
 export default function LogWorkoutScreen() {
+    const workoutStore = useWorkoutStore();
+    const [hasWorkoutInProgress] = useState(workoutStore.hasWorkoutInProgress());
+
+    return (
+        <ScreenLayout screenHasHeader={false}>
+            <Box padding={20}>
+                <Heading>Log workout</Heading>
+                {
+                    hasWorkoutInProgress ?
+                    <WorkoutInProgress /> :
+                    <StartNewWorkout />
+                }
+                
+            </Box>
+        </ScreenLayout>
+    )
+}
+
+function StartNewWorkout() {
     const sessionToken = useAuthStore(state => state.sessionToken);
     const workoutStore = useWorkoutStore();
 
     async function handleStartWorkout() {
         console.log('handleStartWorkout()');
-
-        if(workoutStore.hasWorkoutInProgress()) {
-            console.log('Workout already started.');
-            router.navigate('/log-workout/select-exercise');
-            return;
-        }
 
         const { workoutId } = await startWorkout({ sessionToken });
         console.log(workoutId);
@@ -33,13 +47,21 @@ export default function LogWorkoutScreen() {
 
         router.navigate('/log-workout/select-exercise');
     }
+    
+    return <Button title="Start new workout" onPress={handleStartWorkout} />
+}
+
+function WorkoutInProgress() {
+    const workoutStore = useWorkoutStore();
+
+    async function handleResumeWorkout() {
+        router.navigate('/log-workout/summary');
+    }
 
     return (
-        <ScreenLayout screenHasHeader={false}>
-            <Box padding={20}>
-                <Heading>Log workout</Heading>
-                <Button title="START" onPress={handleStartWorkout} />
-            </Box>
-        </ScreenLayout>
+        <View>
+            <Text>There's already a workout in progress!</Text>
+            <Button title="Resume" onPress={handleResumeWorkout} />
+        </View>
     )
 }
